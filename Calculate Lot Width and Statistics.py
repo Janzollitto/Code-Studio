@@ -3,8 +3,13 @@ import pandas as pd
 import numpy as np
 import os
 
+# Ask the user for the shapefile location and filename
+shapefile_location = input("Enter the folder path for the shapefile: ")
+shapefile_name = input("Enter the shapefile name (e.g., Urbanized Area Parcels.shp): ")
+
 # Load the shapefile
-gdf = gpd.read_file('C:/Users/info/Code Studio Dropbox/5-GIS/Palm Springs/DATA/Parcels/Urbanized Area Parcels/Urbanized Area Parcels.shp')
+shapefile_path = os.path.join(shapefile_location, shapefile_name)
+gdf = gpd.read_file(shapefile_path)
 
 # Calculate width using the bounding box
 gdf['width'] = gdf.geometry.apply(lambda geom: geom.bounds[2] - geom.bounds[0])
