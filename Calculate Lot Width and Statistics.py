@@ -14,8 +14,9 @@ gdf = gpd.read_file(shapefile_path)
 # Drop rows with null geometries
 gdf = gdf.dropna(subset=['geometry'])
 
-# Calculate width using the bounding box
-gdf['width'] = gdf.geometry.apply(lambda geom: geom.bounds[2] - geom.bounds[0])
+# Calculate width using the bounding box and convert acres to square feet
+# Assuming 'width' refers to one dimension and you're converting area to square footage
+gdf['width'] = gdf.geometry.apply(lambda geom: (geom.bounds[2] - geom.bounds[0]) * 43560
 
 # Ask the user for the field to use
 field_name = input("Enter the field name to use for grouping: ")
